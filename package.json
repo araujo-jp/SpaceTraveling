@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watchAll",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prismicio/client": "^4.0.0",
@@ -20,6 +21,8 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@types/node": "^14.14.31",
@@ -39,6 +42,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.10.1",
+    "husky": "^7.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
