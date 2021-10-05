@@ -29,6 +29,11 @@
         }
       }
     }
+    span {
+      font-size:1.125rem;
+      line-height: 1.8;
+      margin: 1.8rem 0;
+    }
   }
 
   section.postMain {
@@ -75,3 +80,24 @@
 
 }
 
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+
+  div {
+    margin-top: 3rem;
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: var(--highlight);
+    }
+  }
+}

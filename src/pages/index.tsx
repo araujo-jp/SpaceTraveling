@@ -148,7 +148,6 @@ export const getStaticProps: GetStaticProps = async ({ preview = false, previewD
     };
   });
 
-  // console.log(postsResponse);
   const postsPagination = {
     next_page: postsResponse.next_page,
     results: posts,
