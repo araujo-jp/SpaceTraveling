@@ -8,6 +8,7 @@ import Prismic from '@prismicio/client'
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 import Header from '../components/Header';
+import { ExitPreview } from '../components/Preview/ExitPreview'
 
 import { FiCalendar, FiUser } from "react-icons/fi";
 import { format } from 'date-fns';
@@ -31,9 +32,10 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
-export default function Home({ postsPagination }: HomeProps): JSX.Element {
+export default function Home({ postsPagination, preview }: HomeProps): JSX.Element {
   const formattedPost = postsPagination.results.map(post => {
     return {
       ...post,
@@ -114,18 +116,23 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           {nextPage && (
             <button className={styles.buttonMorePost} type="button" onClick={handleNexPage}>Carregar mais posts</button>
           )}
+          {preview && (
+            <ExitPreview />
+          )}
       </main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ preview = false, previewData }) => {
   const prismic = getPrismicClient();
 
   const postsResponse = await prismic.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
-      pageSize: 2,
+      pageSize: 5,
+      orderings: '[document.last_publication_date desc]',
+      ref: previewData?.ref || null,
     }
   );
 
@@ -150,6 +157,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       postsPagination,
+      preview,
     },
     revalidate: 60 * 30 // 30 min
   };

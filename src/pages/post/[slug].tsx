@@ -4,6 +4,7 @@ import Prismic from '@prismicio/client';
 import { useRouter } from 'next/router'
 
 import Header from '../../components/Header/'
+import { ExitPreview } from '../../components/Preview/ExitPreview'
 
 import { getPrismicClient } from '../../services/prismic';
 
@@ -40,7 +41,7 @@ interface PostProps {
 export default function Post({ post, preview }: PostProps): JSX.Element {
   const router = useRouter()
 
-  if(router.isFallback) {
+  if (router.isFallback) {
     return <h1>Carregando...</h1>
   }
 
@@ -92,12 +93,17 @@ export default function Post({ post, preview }: PostProps): JSX.Element {
               return (
                 <section key={content.heading} className={styles.postMain} >
                   <h2>{content.heading}</h2>
-                  <div dangerouslySetInnerHTML={{__html: RichText.asHtml(content.body) }} />
+                  <div dangerouslySetInnerHTML={{ __html: RichText.asHtml(content.body) }} />
                 </section>
               )
             })}
           </div>
         </article>
+        {preview && (
+          <div>
+            <ExitPreview />
+          </div>
+        )}
       </main>
     </>
   )
